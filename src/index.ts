@@ -344,6 +344,11 @@ const scrapeParamsSchema = z.object({
 
 server.addTool({
   name: 'firecrawl_scrape',
+  annotations: {
+    title: 'Scrape a URL',
+    readOnlyHint: SAFE_MODE,
+    openWorldHint: true,
+  },
   description: `
 Scrape content from a single URL with advanced options.
 This is the most powerful, fastest and most reliable scraper tool, if available you should always default to using this tool for any web scraping needs.
@@ -470,6 +475,11 @@ ${
 
 server.addTool({
   name: 'firecrawl_map',
+  annotations: {
+    title: 'Map a website',
+    readOnlyHint: true,
+    openWorldHint: true,
+  },
   description: `
 Map a website to discover all indexed URLs on the site.
 
@@ -530,6 +540,11 @@ Map a website to discover all indexed URLs on the site.
 
 server.addTool({
   name: 'firecrawl_search',
+  annotations: {
+    title: 'Search the web',
+    readOnlyHint: true,
+    openWorldHint: true,
+  },
   description: `
 Search the web and optionally extract content from search results. This is the most powerful web search tool available, and if available you should always default to using this tool for any web search needs.
 
@@ -629,6 +644,12 @@ The query also supports search operators, that you can use if needed to refine t
 
 server.addTool({
   name: 'firecrawl_crawl',
+  annotations: {
+    title: 'Start a site crawl',
+    readOnlyHint: false,
+    openWorldHint: true,
+    destructiveHint: false,
+  },
   description: `
  Starts a crawl job on a website and extracts content from all pages.
  
@@ -708,6 +729,11 @@ server.addTool({
 
 server.addTool({
   name: 'firecrawl_check_crawl_status',
+  annotations: {
+    title: 'Get crawl status',
+    readOnlyHint: true,
+    openWorldHint: false,
+  },
   description: `
 Check the status of a crawl job.
 
@@ -735,6 +761,11 @@ Check the status of a crawl job.
 
 server.addTool({
   name: 'firecrawl_extract',
+  annotations: {
+    title: 'Extract structured data',
+    readOnlyHint: true,
+    openWorldHint: true,
+  },
   description: `
 Extract structured information from web pages using LLM capabilities. Supports both cloud AI and self-hosted LLM extraction.
 
@@ -805,6 +836,12 @@ Extract structured information from web pages using LLM capabilities. Supports b
 
 server.addTool({
   name: 'firecrawl_agent',
+  annotations: {
+    title: 'Start a research agent',
+    readOnlyHint: false,
+    openWorldHint: true,
+    destructiveHint: false,
+  },
   description: `
 Autonomous web research agent. This is a separate AI agent layer that independently browses the internet, searches for information, navigates through pages, and extracts structured data based on your query. You describe what you need, and the agent figures out where to find it.
 
@@ -904,6 +941,11 @@ Then poll with \`firecrawl_agent_status\` every 15-30 seconds for at least 2-3 m
 
 server.addTool({
   name: 'firecrawl_agent_status',
+  annotations: {
+    title: 'Get agent job status',
+    readOnlyHint: true,
+    openWorldHint: false,
+  },
   description: `
 Check the status of an agent job and retrieve results when complete. Use this to poll for results after starting an agent with \`firecrawl_agent\`.
 
@@ -945,6 +987,12 @@ Check the status of an agent job and retrieve results when complete. Use this to
 // Browser session tools (deprecated — prefer firecrawl_scrape + firecrawl_interact)
 server.addTool({
   name: 'firecrawl_browser_create',
+  annotations: {
+    title: 'Create browser session',
+    readOnlyHint: false,
+    openWorldHint: false,
+    destructiveHint: false,
+  },
   description: `
 **DEPRECATED — prefer firecrawl_scrape + firecrawl_interact instead.** Interact lets you scrape a page and then click, fill forms, and navigate without managing sessions manually.
 
@@ -994,6 +1042,12 @@ Create a browser session for code execution via CDP (Chrome DevTools Protocol).
 if (!SAFE_MODE) {
   server.addTool({
     name: 'firecrawl_browser_execute',
+    annotations: {
+      title: 'Run code in browser session',
+      readOnlyHint: false,
+      openWorldHint: false,
+      destructiveHint: true,
+    },
     description: `
 **DEPRECATED — prefer firecrawl_scrape + firecrawl_interact instead.** Interact lets you scrape a page and then click, fill forms, and navigate without managing sessions manually.
 
@@ -1071,6 +1125,12 @@ Execute code in a browser session. Supports agent-browser commands (bash), Pytho
 
 server.addTool({
   name: 'firecrawl_browser_delete',
+  annotations: {
+    title: 'Delete browser session',
+    readOnlyHint: false,
+    openWorldHint: false,
+    destructiveHint: true,
+  },
   description: `
 **DEPRECATED — prefer firecrawl_scrape + firecrawl_interact instead.**
 
@@ -1104,6 +1164,11 @@ Destroy a browser session.
 
 server.addTool({
   name: 'firecrawl_browser_list',
+  annotations: {
+    title: 'List browser sessions',
+    readOnlyHint: true,
+    openWorldHint: false,
+  },
   description: `
 **DEPRECATED — prefer firecrawl_scrape + firecrawl_interact instead.**
 
@@ -1138,6 +1203,12 @@ List browser sessions, optionally filtered by status.
 // Interact tools (scrape-bound browser sessions)
 server.addTool({
   name: 'firecrawl_interact',
+  annotations: {
+    title: 'Interact with a scraped page',
+    readOnlyHint: false,
+    openWorldHint: true,
+    destructiveHint: false,
+  },
   description: `
 Interact with a previously scraped page in a live browser session. Scrape a page first with firecrawl_scrape, then use the returned scrapeId to click buttons, fill forms, extract dynamic content, or navigate deeper.
 
@@ -1209,6 +1280,12 @@ Interact with a previously scraped page in a live browser session. Scrape a page
 
 server.addTool({
   name: 'firecrawl_interact_stop',
+  annotations: {
+    title: 'Stop interact session',
+    readOnlyHint: false,
+    openWorldHint: false,
+    destructiveHint: true,
+  },
   description: `
 Stop an interact session for a scraped page. Call this when you are done interacting to free resources.
 
