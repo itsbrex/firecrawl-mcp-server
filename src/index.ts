@@ -1402,6 +1402,11 @@ if (process.env.CLOUD_SERVICE !== 'true') {
 
   server.addTool({
     name: 'firecrawl_parse',
+    annotations: {
+      title: 'Parse a local file',
+      readOnlyHint: true,
+      openWorldHint: false,
+    },
     description: `
 Parse a file from the local filesystem using a self-hosted Firecrawl API's /v2/parse endpoint.
 This is the fastest and most reliable way to extract content from a document on disk — if the file lives locally and the MCP is pointed at a self-hosted Firecrawl instance, you should always prefer this tool over uploading the file elsewhere and then scraping it.
